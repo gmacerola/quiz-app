@@ -48,6 +48,7 @@ function checkAnswer () {
         event.preventDefault();
         let selected = $('input:checked');
         console.log(STORE[quesNum].answer);
+        console.log(selected);
         if (selected === STORE[quesNum].answer) {
             console.log("Correct");
         } else {
