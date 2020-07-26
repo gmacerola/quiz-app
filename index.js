@@ -49,7 +49,7 @@ function checkAnswer () {
         let selected = $('input[name=userAnswer]:checked').val(); 
         console.log(STORE[quesNum].answer);
         console.log(selected);
-        if (selected === STORE[quesNum].answer) {
+        if (selected == STORE[quesNum].answer) {
             console.log("Correct");
         } else {
             console.log("Failed");
