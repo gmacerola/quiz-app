@@ -22,14 +22,14 @@ function startQuiz () {
         <h2>${questionText}</h2>
         <div>
         <form>
-        <label for="possAnswers[0]">${possAnswers[0]}</label>
-        <input type="radio" name="userAnswer" id="possAnswers[0]">
-        <label for="possAnswers[1]">${possAnswers[1]}</label>
-        <input type="radio" name="userAnswer" id="possAnswers[1]">
-        <label for="possAnswers[2]">${possAnswers[2]}</label>
-        <input type="radio" name="userAnswer" id="possAnswers[2]">
-        <label for="possAnswers[3]">${possAnswers[3]}</label>
-        <input type="radio" name="userAnswer" id="possAnswers[3]">
+        <label for="0">${possAnswers[0]}</label>
+        <input type="radio" name="userAnswer" id="0">
+        <label for="1">${possAnswers[1]}</label>
+        <input type="radio" name="userAnswer" id="1">
+        <label for="2">${possAnswers[2]}</label>
+        <input type="radio" name="userAnswer" id="2">
+        <label for="3">${possAnswers[3]}</label>
+        <input type="radio" name="userAnswer" id="3">
         </form>
         </div>
         `);
@@ -44,10 +44,15 @@ function startQuiz () {
 }
 
 function checkAnswer () {
-    $(".buttons").on("click" , "submit" , function(event) {
+    $(".buttons").on("click" , ".button" , function(event) {
         event.preventDefault();
         let selected = $('input:checked');
-        console.log("selected");
+        console.log(STORE[quesNum].answer);
+        if (selected === STORE[quesNum].answer) {
+            console.log("Correct");
+        } else {
+            console.log("Failed");
+        }
     })
 }
 
