@@ -46,7 +46,7 @@ function startQuiz () {
 function checkAnswer () {
     $(".buttons").on("click" , ".button" , function(event) {
         event.preventDefault();
-        let selected = $('input:checked');
+        let selected = $('input:checked').val();
         console.log(STORE[quesNum].answer);
         console.log(selected);
         if (selected === STORE[quesNum].answer) {
