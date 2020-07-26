@@ -46,7 +46,7 @@ function startQuiz () {
 function checkAnswer () {
     $(".buttons").on("click" , ".button" , function(event) {
         event.preventDefault();
-        let selected = $('input:checked').val();
+        let selected = $('input[name=userAnswer]:checked').val(); 
         console.log(STORE[quesNum].answer);
         console.log(selected);
         if (selected === STORE[quesNum].answer) {
@@ -64,4 +64,3 @@ function advanceQuestion () {
 //if array[4] happens new replace html with final score & reset button
 
 startQuiz();
-checkAnswer();
