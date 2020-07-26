@@ -23,13 +23,13 @@ function startQuiz () {
         <div>
         <form>
         <label for="0">${possAnswers[0]}</label>
-        <input type="radio" name="userAnswer" id="0">
+        <input type="radio" name="userAnswer" id="0" value="0">
         <label for="1">${possAnswers[1]}</label>
-        <input type="radio" name="userAnswer" id="1">
+        <input type="radio" name="userAnswer" id="1" value="1">
         <label for="2">${possAnswers[2]}</label>
-        <input type="radio" name="userAnswer" id="2">
+        <input type="radio" name="userAnswer" id="2" value="2">
         <label for="3">${possAnswers[3]}</label>
-        <input type="radio" name="userAnswer" id="3">
+        <input type="radio" name="userAnswer" id="3" value="3">
         </form>
         </div>
         `);
