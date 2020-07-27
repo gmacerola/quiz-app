@@ -10,7 +10,7 @@ const STORE = [
                         "Boston"
                     ],
         answer:         1,
-        funFact:        "Philadelphia: Philadelphia had been the “capital” of the colonies for most of the American Revolution and it was centrally located for a meeting of the delegates from the twelve colonies."
+        funFact:        "Philadelphia had been the “capital” of the colonies for most of the American Revolution and it was centrally located for a meeting of the delegates from the twelve colonies."
     }
 ,
     {
