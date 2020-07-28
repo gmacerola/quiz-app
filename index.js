@@ -42,12 +42,8 @@ function startQuiz () {
         checkAnswer();
         console.log(STORE.length);
         console.log(quesNum);
-        if (quesNum === STORE.length) {
-            final();
-        } else
-            advanceQuestion();
-        })
-    }
+        advanceQuestion();
+    })
 
 
 function checkAnswer () {
@@ -73,6 +69,9 @@ function advanceQuestion () {
     $(".buttons").on("click" , ".next" , function(event) {
         updateQuesNum();
         console.log(quesNum);
+        if (quesNum === STORE.length) {
+            final();
+        } else {
         $(".quesNum").text(quesNum);
         $(".correctNum").text(correctNum);
         let questionText = STORE[quesNum].question;
@@ -102,8 +101,9 @@ function advanceQuestion () {
         console.log(buttonHtml);
         $(".buttons").html(buttonHtml);
         
+    }
+
 })
-}
 
 function final () {
     $(".buttons").on("click" , ".submit" , function(event) {
