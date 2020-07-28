@@ -35,44 +35,44 @@ function startQuiz () {
         `);
         $(".buttons").append(`
             <div>
-            <button type="submit" class="button" id="answer">Submit</button>
-            <button type="button" class="button" id="next">Next Question</button>
+            <button type="submit" class="submit" id="answer">Submit</button>
+            <button type="button" class="next" id="next">Next Question</button>
             </div>`
         );
         checkAnswer();
-<<<<<<< HEAD
         console.log(STORE.length);
         console.log(quesNum);
-        advanceQuestion();
-    })
+        if (quesNum === STORE.length - 1) {
+            final();
+        } else
+            advanceQuestion();
+        })
+    }
 
-=======
-    })
-}
->>>>>>> parent of eb2410f... Mostly done but final not implementing
 
 function checkAnswer () {
-    $(".buttons").on("click" , ".button" , function(event) {
+    $(".buttons").on("click" , ".submit" , function(event) {
         event.preventDefault();
         let selected = $('input[name=userAnswer]:checked').val(); 
-        console.log(STORE[quesNum].answer);
-        console.log(selected);
-        if (selected == STORE[quesNum].answer) {
-            console.log("Correct");
+        if (!selected) {
+            alert("Choose an option");
+        } else if (selected == STORE[quesNum].answer) {
+            $(".questText").append(`
+            <h2>CORRECT</h2>
+            <h3>${STORE[quesNum].funFact}</h3>`);
+            correctNum++;
         } else {
-            console.log("Failed");
+            $(".questText").append(`
+            <h2>INCORRECT</h2>
+            <h3>${STORE[quesNum].funFact}</h3>`)
         }
     })
 }
 
 function advanceQuestion () {
-<<<<<<< HEAD
     $(".buttons").on("click" , ".next" , function(event) {
         updateQuesNum();
         console.log(quesNum);
-        if (quesNum === STORE.length) {
-            final();
-        } else {
         $(".quesNum").text(quesNum);
         $(".correctNum").text(correctNum);
         let questionText = STORE[quesNum].question;
@@ -102,9 +102,8 @@ function advanceQuestion () {
         console.log(buttonHtml);
         $(".buttons").html(buttonHtml);
         
-    }
-
 })
+}
 
 function final () {
     $(".buttons").on("click" , ".submit" , function(event) {
@@ -117,11 +116,9 @@ function final () {
             </div>
         `)
         $(".questText").html(finalHtml);
-=======
->>>>>>> parent of eb2410f... Mostly done but final not implementing
 
+})
 }
-
 //if array[4] happens new replace html with final score & reset button
 
 startQuiz();
