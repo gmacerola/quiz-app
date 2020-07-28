@@ -42,7 +42,7 @@ function startQuiz () {
         checkAnswer();
         console.log(STORE.length);
         console.log(quesNum);
-        if (quesNum === STORE.length - 1) {
+        if (quesNum === STORE.length) {
             final();
         } else
             advanceQuestion();
