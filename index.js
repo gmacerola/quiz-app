@@ -54,7 +54,9 @@ function startQuiz () {
 }
 
 function renderQuestion () {
-    $(".start").remove();
+    $(".start").hide();
+    $(".quesNum").text(quesNum + 1);
+    $(".correctNum").text(correctNum);
     const questionHtml = $(`
     <div class="questionText">
         <h2>${STORE[quesNum].question}</h2>
@@ -114,21 +116,35 @@ function advanceQuestion () {
         if (quesNum < STORE.length) {
             $(".answer").html(``);
             renderQuestion();
-            checkAnswer();
         } else {
-            $(".question").html(`<h2>Final Score = ${correctNum}</h2>`)
-            $(".choices").html(``);
-            $(".buttons").html(``);
-            $(".answer").html(``);
+            finalScreen();
+            //$(".question").html(`<h2>Final Score = ${correctNum}</h2>`)
+            //$(".choices").html(``);
+            //$(".buttons").html(``);
+            //$(".answer").html(``);
         }
     })
 }
 
 function finalScreen () {
-    
+    $(".question").html(`<h2>You got ${correctNum} out of ${STORE.length}</h2>`)
+    $(".choices").html(`
+        <button type="button" class="restart button" id="restart">Try Again?</button>
+    `)
+    $(".buttons").html(``);
+    $(".answer").html(``);
+    $(".choices").on("click" , ".restart" , function(event) {
+        $(".question").html(``);
+        $(".choices").html(``);
+        quesNum = 0;
+        correctNum = 0;
+        $(".quesNum").text(0);
+        $(".correctNum").text(0);
+        $(".start").show();
+    })
 }
 
-/*function renderChoices () {
+/* function renderChoices () {
     for (let i = 0; i < STORE[quesNum].choices.length; i++) {
         $(`<h4>Testing</h4>
         <input type="radio" name="userAnswer" id="choices${i+1}" value="${STORE[quesNum].choices[i]}">
