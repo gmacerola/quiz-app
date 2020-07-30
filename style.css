@@ -2,6 +2,8 @@
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
   body {
@@ -17,23 +19,32 @@
     background-position: center;
     text-align: center;
     height: 150px;
-    margin-bottom: 0;
+    margin-bottom: 20px;
   }
 
   header h1 {
     margin-top: 0px;
     align-self: center;
+    color: #D9D1C7;
+    max-width: 350px;
+    padding: 10px;
+    background-color: #3F3E40;
+    border-radius: 8px;
   }
 
   main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    min-width: 360px;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 0;
     text-align: center;
+    border: 2px #3F3E40 solid;
+    background-color: #A6978A;
+    border-radius: 8px;
+    color: #3F3E40;
   }
 
   .start {
@@ -46,23 +57,65 @@
 
   .questionAndScore ul {
     text-align: center;
-    padding-left: 0px;
+    background-color: #3F3E40;
+    color: #D9D1C7;
+    max-width: 250px;
+    margin: 0 auto;
+    padding: 5px;
+    border-radius: 8px;
+    font-size: 16px;
   }
 
   .questionAndScore li {
-    margin:0 30px;
+    margin:0 20px;
     display:inline-block;
   }
 
-  .button {
-    cursor: pointer;
-    background-color: #596e79;
-    color: #dfd3c3;
-    font-size: 36px;
-    text-align: center;
+  h2 {
     margin-top: 10px;
-    font-family: 'Libre Caslon Text', serif;
+    margin-bottom: 10px;
   }
+
+.question, .choices, .buttons, .answer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+
+.choices {
+  text-align: left;
+}
+
+input {
+  margin-bottom: 20px;
+}
+
+.correct {
+  color: green;
+  border: 2px green solid;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.incorrect {
+  color: red;
+  border: 2px red solid;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.button {
+  cursor: pointer;
+  background-color: #596e79;
+  color: #dfd3c3;
+  font-size: 36px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: 'Libre Caslon Text', serif;
+}
 
   footer {
     width: 100%;
