@@ -71,19 +71,25 @@ function checkAnswer () {
 
 function advanceQuestion () {
     $(".buttons").on("click" , ".next" , function(event) {
-        updateQuesNum();
-        $(".answer").removeClass("correct incorrect");
-        if (quesNum < STORE.length) {
-            $(".answer").html(``);
-            renderQuestion();
+        let selected = $('input[name=userAnswer]:checked').val();
+        if (!selected) {
+            alert("Choose an option");
         } else {
-            finalScreen();
-            //$(".question").html(`<h2>Final Score = ${correctNum}</h2>`)
-            //$(".choices").html(``);
-            //$(".buttons").html(``);
-            //$(".answer").html(``);
+            updateQuesNum();
+            $(".answer").removeClass("correct incorrect");
+            if (quesNum < STORE.length) {
+                $(".answer").html(``);
+                renderQuestion();
+            } else {
+                finalScreen();
+                //$(".question").html(`<h2>Final Score = ${correctNum}</h2>`)
+                //$(".choices").html(``);
+                //$(".buttons").html(``);
+                //$(".answer").html(``);
+            }
         }
     })
+
 }
 
 function finalScreen () {
@@ -107,6 +113,7 @@ function finalScreen () {
 function handleQuiz() {
     startQuiz ();
     checkAnswer();
+    advanceQuestion();
 }
 
 $(handleQuiz);
