@@ -1,26 +1,26 @@
 let quesNum = 0;
 let correctNum = 0;
 
-function updateQuesNum () {
-    quesNum++;
+function updateQuesNum() {
+  quesNum++;
 }
 
-function startQuiz () {
-    $(".js-startButton").on("click" , function (event) {
-        renderQuestion();
-    })
+function startQuiz() {
+  $(".js-startButton").on("click", function (event) {
+    renderQuestion();
+  });
 }
 
-function renderQuestion () {
-    $(".start").hide();
-    $(".quesNum").text(quesNum + 1);
-    $(".correctNum").text(correctNum);
-    /*const questionHtml = $(`
+function renderQuestion() {
+  $(".start").hide();
+  $(".quesNum").text(quesNum + 1);
+  $(".correctNum").text(correctNum);
+  /*const questionHtml = $(`
     <div class="questionText">
         <h2>${STORE[quesNum].question}</h2>
     </div>
     `);*/
-    /*const choicesHtml = $(`
+  /*const choicesHtml = $(`
         <div>
             <form>
                 <input type="radio" name="userAnswer" id="0" value="0">    
@@ -37,110 +37,106 @@ function renderQuestion () {
             </form>
         </div>
     `)*/
-    const buttonsHtml = $(`
+  const buttonsHtml = $(`
         <div class="buttons">
         <button type="submit" class="submit button" id="answer">Submit</button>
         <button type="button" class="next button" id="next">Next Question</button>
         </div>
     `);
-    getQuestion();
-    /*$(".question").html(questionHtml);*/
-    getChoices();
-    $(".buttons").html(buttonsHtml);
+  getQuestion();
+  /*$(".question").html(questionHtml);*/
+  getChoices();
+  $(".buttons").html(buttonsHtml);
 }
 
-function getQuestion () {
-    const questionsHtml = $(`
+function getQuestion() {
+  const questionsHtml = $(`
     <div class="questionText">
         <h2>${STORE[quesNum].question}</h2>
     </div>
-    `)
-    $(".question").html(questionsHtml);
+    `);
+  $(".question").html(questionsHtml);
 }
 
-function getChoices () {
-     const choicesArray = STORE[quesNum].choices;
-     const choicesHtmlRef = $(".choices");
-     const answersArray = [];
-     for (i = 0; i < choicesArray.length; i++) {
-         if (i < choicesArray.length - 1) {
-            answersArray.push(`<div class="inputs"><input type="radio" name="userAnswer" id=${i} value=${i}>
-            <label for=${i}>${STORE[quesNum].choices[i]}</label></div><br>`)
-         } else {
-            answersArray.push(`<div class="inputs"><input type="radio" name="userAnswer" id=${i} value=${i}>
-            <label for=${i}>${STORE[quesNum].choices[i]}</label></div>`)
-         }
-    }
-    choicesHtmlRef.html(answersArray.join(''));
+function getChoices() {
+  const choicesArray = STORE[quesNum].choices;
+  const choicesHtmlRef = $(".choices");
+  const answersArray = [];
+  for (i = 0; i < choicesArray.length; i++) {
+    answersArray.push(`<div class="inputs"><input type="radio" name="userAnswer" id=${i} value=${i}>
+            <label for=${i}>${STORE[quesNum].choices[i]}</label></div>`);
+  }
+  choicesHtmlRef.html(answersArray.join(""));
 }
 
-function checkAnswer () {
-    $(".buttons").on("click" , ".submit" , function(event) {
-        event.preventDefault();
-        let selected = $('input[name=userAnswer]:checked').val(); 
-        if (!selected) {
-            alert("Choose an option");
-        } else if (selected == STORE[quesNum].answer) {
-            $(".answer").addClass("correct");
-            $(".answer").html(`
+function checkAnswer() {
+  $(".buttons").on("click", ".submit", function (event) {
+    event.preventDefault();
+    let selected = $("input[name=userAnswer]:checked").val();
+    if (!selected) {
+      alert("Choose an option");
+    } else if (selected == STORE[quesNum].answer) {
+      $(".answer").addClass("correct");
+      $(".answer").html(`
             <h2>CORRECT</h2>
             <h3>${STORE[quesNum].funFact}</h3>`);
-            correctNum+=1;
-        } else {
-            $(".answer").addClass("incorrect");
-            $(".answer").html(`
+      correctNum += 1;
+    } else {
+      $(".answer").addClass("incorrect");
+      $(".answer").html(`
             <h2>INCORRECT</h2>
-            <h3>${STORE[quesNum].funFact}</h3>`)
-        }
-    })
+            <h3>${STORE[quesNum].funFact}</h3>`);
+    }
+  });
 }
 
-function advanceQuestion () {
-    $(".buttons").on("click" , ".next" , function(event) {
-        let selected = $('input[name=userAnswer]:checked').val();
-        if (!selected) {
-            alert("Choose an option");
-        } else {
-            updateQuesNum();
-            $(".answer").removeClass("correct incorrect");
-            if (quesNum < STORE.length) {
-                $(".answer").html(``);
-                renderQuestion();
-            } else {
-                finalScreen();
-                //$(".question").html(`<h2>Final Score = ${correctNum}</h2>`)
-                //$(".choices").html(``);
-                //$(".buttons").html(``);
-                //$(".answer").html(``);
-            }
-        }
-    })
-
+function advanceQuestion() {
+  $(".buttons").on("click", ".next", function (event) {
+    let selected = $("input[name=userAnswer]:checked").val();
+    if (!selected) {
+      alert("Choose an option");
+    } else {
+      updateQuesNum();
+      $(".answer").removeClass("correct incorrect");
+      if (quesNum < STORE.length) {
+        $(".answer").html(``);
+        renderQuestion();
+      } else {
+        finalScreen();
+        //$(".question").html(`<h2>Final Score = ${correctNum}</h2>`)
+        //$(".choices").html(``);
+        //$(".buttons").html(``);
+        //$(".answer").html(``);
+      }
+    }
+  });
 }
 
-function finalScreen () {
-    $(".correctNum").text(correctNum);
-    $(".question").html(`<h2>You got ${correctNum} out of ${STORE.length} correct.</h2>`)
-    $(".choices").html(`
+function finalScreen() {
+  $(".correctNum").text(correctNum);
+  $(".question").html(
+    `<h2>You got ${correctNum} out of ${STORE.length} correct.</h2>`
+  );
+  $(".choices").html(`
         <button type="button" class="restart button" id="restart">Try Again?</button>
-    `)
-    $(".buttons").html(``);
-    $(".answer").html(``);
-    $(".choices").on("click" , ".restart" , function(event) {
-        $(".question").html(``);
-        $(".choices").html(``);
-        quesNum = 0;
-        correctNum = 0;
-        $(".quesNum").text(0);
-        $(".correctNum").text(0);
-        $(".start").show();
-    })
+    `);
+  $(".buttons").html(``);
+  $(".answer").html(``);
+  $(".choices").on("click", ".restart", function (event) {
+    $(".question").html(``);
+    $(".choices").html(``);
+    quesNum = 0;
+    correctNum = 0;
+    $(".quesNum").text(0);
+    $(".correctNum").text(0);
+    $(".start").show();
+  });
 }
 
 function handleQuiz() {
-    startQuiz ();
-    checkAnswer();
-    advanceQuestion();
+  startQuiz();
+  checkAnswer();
+  advanceQuestion();
 }
 
 $(handleQuiz);
