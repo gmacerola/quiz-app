@@ -15,12 +15,12 @@ function renderQuestion () {
     $(".start").hide();
     $(".quesNum").text(quesNum + 1);
     $(".correctNum").text(correctNum);
-    const questionHtml = $(`
+    /*const questionHtml = $(`
     <div class="questionText">
         <h2>${STORE[quesNum].question}</h2>
     </div>
-    `);
-    const choicesHtml = $(`
+    `);*/
+    /*const choicesHtml = $(`
         <div>
             <form>
                 <input type="radio" name="userAnswer" id="0" value="0">    
@@ -36,16 +36,42 @@ function renderQuestion () {
                 <label for="3">${STORE[quesNum].choices[3]}</label>
             </form>
         </div>
-    `)
+    `)*/
     const buttonsHtml = $(`
         <div class="buttons">
         <button type="submit" class="submit button" id="answer">Submit</button>
         <button type="button" class="next button" id="next">Next Question</button>
         </div>
     `);
-    $(".question").html(questionHtml);
-    $(".choices").html(choicesHtml);
+    getQuestion();
+    /*$(".question").html(questionHtml);*/
+    getChoices();
     $(".buttons").html(buttonsHtml);
+}
+
+function getQuestion () {
+    const questionsHtml = $(`
+    <div class="questionText">
+        <h2>${STORE[quesNum].question}</h2>
+    </div>
+    `)
+    $(".question").html(questionsHtml);
+}
+
+function getChoices () {
+     const choicesArray = STORE[quesNum].choices;
+     const choicesHtmlRef = $(".choices");
+     const answersArray = [];
+     for (i = 0; i < choicesArray.length; i++) {
+         if (i < choicesArray.length - 1) {
+            answersArray.push(`<div class="inputs"><input type="radio" name="userAnswer" id=${i} value=${i}>
+            <label for=${i}>${STORE[quesNum].choices[i]}</label></div><br>`)
+         } else {
+            answersArray.push(`<div class="inputs"><input type="radio" name="userAnswer" id=${i} value=${i}>
+            <label for=${i}>${STORE[quesNum].choices[i]}</label></div>`)
+         }
+    }
+    choicesHtmlRef.html(answersArray.join(''));
 }
 
 function checkAnswer () {
@@ -59,7 +85,7 @@ function checkAnswer () {
             $(".answer").html(`
             <h2>CORRECT</h2>
             <h3>${STORE[quesNum].funFact}</h3>`);
-            correctNum++;
+            correctNum+=1;
         } else {
             $(".answer").addClass("incorrect");
             $(".answer").html(`
@@ -93,6 +119,7 @@ function advanceQuestion () {
 }
 
 function finalScreen () {
+    $(".correctNum").text(correctNum);
     $(".question").html(`<h2>You got ${correctNum} out of ${STORE.length} correct.</h2>`)
     $(".choices").html(`
         <button type="button" class="restart button" id="restart">Try Again?</button>

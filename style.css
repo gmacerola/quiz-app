@@ -76,7 +76,7 @@
     margin-bottom: 10px;
   }
 
-.question, .choices, .buttons, .answer {
+.question, .buttons, .answer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -85,11 +85,19 @@
 }
 
 .choices {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: left;
+}
+
+.inputs {
+  display: flex;
 }
 
 input {
   margin-bottom: 20px;
+  margin-right: 5px;
 }
 
 .correct {
